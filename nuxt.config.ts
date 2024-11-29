@@ -6,5 +6,10 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   hub: {
     database: true
+  },
+  nitro: {
+    experimental: {
+      openAPI: true,
+    }
   }
 })
