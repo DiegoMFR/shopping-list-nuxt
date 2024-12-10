@@ -11,15 +11,21 @@
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
+    "@nuxt/eslint-config": "^0.7.2",
     "@nuxthub/core": "^0.8.7",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "drizzle-orm": "^0.36.4",
     "nuxt": "^3.14.1592",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "vue-tsc": "^2.1.10"
   },
   "devDependencies": {
+    "@nuxt/eslint": "^0.7.2",
     "drizzle-kit": "^0.28.1",
+    "eslint": "^9.16.0",
+    "typescript": "^5.7.2",
     "wrangler": "^3.91.0"
-  }
+  },
+  "packageManager": "auto"
 }

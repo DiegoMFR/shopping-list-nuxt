@@ -2,14 +2,20 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxthub/core'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxthub/core', '@nuxt/eslint'],
+  future: { compatibilityVersion: 4 },
   css: ['~/assets/css/main.css'],
   hub: {
-    database: true
+    database: true,
+    kv: true,
+    blob: true,
+    cache: true,
+    ai: true,
   },
   nitro: {
     experimental: {
-      openAPI: true,
+      // Enable Server API documentation within NuxtHub
+      openAPI: true
     }
-  }
+  },
 })

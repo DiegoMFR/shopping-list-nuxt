@@ -1,7 +1,28 @@
-export default defineEventHandler(async (event) => {
+export type ListData = {
+  title: string;
+  id: string;
+  owner: string;
+};
+
+export type ListDataList = {results : Array<ListData>};
+
+export default eventHandler(async () => {
+
+  try {
+
     const db = hubDatabase();
 
-    const { results } = await db.prepare('SELECT * from lists').all();
+    // TODO: move it a a Server Task
+    await db.exec('CREATE TABLE IF NOT EXISTS lists (id INTEGER PRIMARY KEY, title TEXT, owner TEXT)')
 
-    return results
+    const { results }:ListDataList = await db.prepare('SELECT * from lists').all();
+    
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    console.log(results);
+      return results;
+
+  } catch (e) {
+    console.error(e);
+  }
   })
