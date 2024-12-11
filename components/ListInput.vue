@@ -102,12 +102,12 @@ const filterList = async (e: Event) => {
         isLoadingSuggestions.value = true;
         const { object } = await getSuggestions(value, topics);
 
-        for await (const partialObject of readStreamableValue(object)) {
-            if (partialObject) {
-                aiSuggestions.value = (partialObject);
-                isLoadingSuggestions.value = false;
-            }
-        }
+        // for await (const partialObject of readStreamableValue(object)) {
+        //     if (partialObject) {
+        //         aiSuggestions.value = (partialObject);
+        //         isLoadingSuggestions.value = false;
+        //     }
+        // }
 
     }
 }
