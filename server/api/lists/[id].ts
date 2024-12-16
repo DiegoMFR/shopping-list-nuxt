@@ -10,7 +10,7 @@ export default eventHandler(async (event) => {
   const db = hubDatabase();
   const id = getRouterParam(event, "id") || "unknown";
   const data = await db
-    .prepare(`SELECT id, title, owner FROM Lists WHERE id=${id}`)
+    .prepare(`SELECT id, title, owner FROM lists WHERE id=${id}`)
     .first();
 
   if (!data) {

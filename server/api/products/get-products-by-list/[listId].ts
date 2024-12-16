@@ -10,7 +10,7 @@ export async function getProductsById(
     products: Array<string>
   ): Promise<ShoppingList | null> {
     const db = hubDatabase();
-    const selectById = (listId: string) => db.prepare(`SELECT * FROM Products WHERE id=${listId}`).first();
+    const selectById = (listId: string) => db.prepare(`SELECT * FROM products WHERE id=${listId}`).first();
     
     const results = await Promise.all(products.map(product => selectById(product)))
     
