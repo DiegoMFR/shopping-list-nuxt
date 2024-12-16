@@ -10,6 +10,9 @@
                             <h2 class="text-lg">{{list.title}}</h2>
                             </NuxtLink>
                         </li>
+                        <li class="bg-indigo-500/75 rounded-md col-span-6">
+                            <CreateListForm/>
+                        </li>
 
                     </ul>
                 </section>
@@ -26,6 +29,7 @@
 
 
 <script setup lang="ts">
+import CreateListForm from "./CreateListForm.vue";
 import DashboardSkeleton from "./DashboardSkeleton.vue";
 import type { ListDataList } from "~/server/api/lists";
 const lists = ref<ListDataList>();

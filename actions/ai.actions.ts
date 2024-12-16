@@ -5,6 +5,5 @@ export async function getSuggestions(input: string, topics: string[]) {
 }
 
 export async function addEmoji(input: string) {
-    const {response} = await $fetch('/api/ai/get-emoji', { method: 'POST', body: { input } });
-    return JSON.parse(String(response));
+    return await $fetch('/api/ai/get-emoji', { method: 'POST', body: { input } });
 }
