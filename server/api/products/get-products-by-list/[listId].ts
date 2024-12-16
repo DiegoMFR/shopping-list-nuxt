@@ -33,6 +33,9 @@ export async function getProductsById(
 
   export async function getProductsByList(listId: string): Promise<ShoppingList> {
     const db = hubDatabase();
+    await db.exec(
+      "CREATE TABLE IF NOT EXISTS list_products (id INTEGER PRIMARY KEY, product TEXT, list TEXT)"
+    );
     const { results } = await db.prepare(`SELECT * FROM list_products WHERE list=${listId}`).all();
 
     let response: ShoppingList = [];
