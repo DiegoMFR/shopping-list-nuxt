@@ -8,7 +8,7 @@
     </li>
 </template>
 <script setup lang="ts">
-import type { ShoppingItem } from '~/server/api/products';
+import type { ShoppingItem } from '~/types';
 
 interface Props {
     listItem: ShoppingItem

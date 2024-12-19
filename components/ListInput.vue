@@ -25,8 +25,7 @@
 </template>
 <script setup lang="ts">
 import { addEmoji, getSuggestions } from '~/actions/ai.actions';
-import type { ShoppingItem, ShoppingList } from '~/server/api/products';
-
+import type { ShoppingItem, ShoppingList } from '~/types';
 
 interface Props {
     topics: Array<string>
@@ -34,7 +33,7 @@ interface Props {
 
 const { topics = ['general'] } = defineProps<Props>();
 
-const items = ref<ShoppingList>(new Set());
+const items = ref<ShoppingList>([]);
 const aiSuggestions = ref<Array<string>>([]);
 const inputVal = ref('');
 const isLoadingSuggestions = ref(false);
@@ -49,7 +48,7 @@ const fetchData = async () => {
     try {
         const response = await $fetch('/api/list-products', { method: 'GET' });
         if (Array.isArray(response)) {
-            items.value = new Set(response);
+            items.value = response;
         }
 
     } catch (error) {
@@ -73,7 +72,7 @@ const addToList = async (itemName: string): Promise<ShoppingItem> => {
         throw new Error('Failed to add item to list');
     }
 
-    items.value = new Set([...Array.from(items.value), resultItem]);
+    items.value = [...Array.from(items.value), resultItem];
 
     return resultItem;
 }

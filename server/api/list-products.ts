@@ -1,16 +1,5 @@
-export type ShoppingItem = {
-  name: string;
-  id?: string;
-  icon: string;
-};
+import type { ShoppingItem, ShoppingList } from "~/types";
 
-export type ShoppingList = Array<ShoppingItem>;
-
-type ProductsResponse = {
-  name: string;
-  id?: number;
-  icon: string;
-};
 
 export default eventHandler(async ():Promise<ShoppingList> => {
     const db = hubDatabase();
@@ -22,7 +11,7 @@ export default eventHandler(async ():Promise<ShoppingList> => {
 
     const { results } = await db
       .prepare("SELECT * from products")
-      .all<ProductsResponse>();
+      .all<ShoppingItem>();
 
       const res = results.map( (result):ShoppingItem => ({
         id: String(result.id),

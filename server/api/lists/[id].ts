@@ -1,10 +1,5 @@
-import type { ShoppingList } from "../list-products";
-import type { ListData } from "../lists";
-import { getProductsByList } from "../products/get-products-by-list/[listId]";
-
-export type ListDataWithProducts = ListData & {
-  products: ShoppingList;
-};
+import { getProductsByList } from "~/server/utils";
+import type { ListData } from "~/types";
 
 export default eventHandler(async (event) => {
   const db = hubDatabase();
@@ -24,7 +19,7 @@ export default eventHandler(async (event) => {
 
   const products = await getProductsByList(id);
 
-  const listData: ListDataWithProducts = {
+  const listData: ListData = {
     id,
     title,
     owner,

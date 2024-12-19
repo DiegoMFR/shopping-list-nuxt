@@ -1,23 +1,19 @@
-import { getProductsByList } from "./get-products-by-list/[listId]";
+import { getProductsByList } from "~/server/utils";
 
 export default eventHandler(async (event) => {
-    const { productId, listId } = await getQuery(event);
-  
-    try {
-      const db = hubDatabase();
-      if (!productId || !listId)
-        throw new Error("Pet and owner names required");
+  const { productId, listId } = await getQuery(event);
 
-      await db
-        .prepare(
-          'DELETE FROM list_products WHERE product = ?1 AND list = ?2;'
-        )
-        .bind(productId, listId)
-        .run();
+  try {
+    const db = hubDatabase();
+    if (!productId || !listId) throw new Error("Pet and owner names required");
 
-        return await getProductsByList(String(listId))
-    } catch (e) {
-      console.error(e);
-    }
-  });
-  
+    await db
+      .prepare("DELETE FROM list_products WHERE product = ?1 AND list = ?2;")
+      .bind(productId, listId)
+      .run();
+
+    return await getProductsByList(String(listId));
+  } catch (e) {
+    console.error(e);
+  }
+});

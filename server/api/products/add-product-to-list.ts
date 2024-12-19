@@ -1,5 +1,21 @@
+import z from 'zod';
+
+const bodySchema = z.object({
+	productId: z.string(),
+	listId: z.string(),
+});
+
 export default eventHandler(async (event) => {
-    const { productId, listId } = await readBody(event);
+
+  const parsedBody =  await readValidatedBody(event, bodySchema.safeParse);
+
+  if (!parsedBody.success) {
+    // Handle the error case
+    throw new Error('Invalid request body');
+  }
+
+  const { productId, listId } = parsedBody.data;
+
   
     try {
       const db = hubDatabase();

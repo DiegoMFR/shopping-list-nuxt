@@ -1,5 +1,5 @@
 export default eventHandler(async (event) => {
-  const { productName, productIcon } = await getQuery(event);
+  const { productName, productIcon } = getQuery(event);
 
   try {
     const db = hubDatabase();

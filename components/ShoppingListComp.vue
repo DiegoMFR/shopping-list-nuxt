@@ -1,12 +1,12 @@
 <template>
     <ul className="w-full p-0 m-0 place-content-center grow">
         <ShoppingListItem
-            v-for="item of list" :key="item.id" :list-item="item" @list-item-click="handleClick"
-            :theme="theme" />
+            v-for="item of list" :key="item.id" :list-item="item" :theme="theme"
+            @list-item-click="handleClick" />
     </ul>
 </template>
 <script setup lang="ts">
-import type { ShoppingItem, ShoppingList } from '~/server/api/products';
+import type { ShoppingItem, ShoppingList } from '~/types';
 
 
 interface Props {

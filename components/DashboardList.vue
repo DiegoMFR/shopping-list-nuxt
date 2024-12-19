@@ -29,9 +29,8 @@
 
 
 <script setup lang="ts">
-import CreateListForm from "./CreateListForm.vue";
-import DashboardSkeleton from "./DashboardSkeleton.vue";
-import type { ListDataList } from "~/server/api/lists";
+import type { ListDataList } from '~/types';
+
 const lists = ref<ListDataList>();
 
 try {

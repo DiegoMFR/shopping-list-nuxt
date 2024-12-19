@@ -1,59 +1,33 @@
-import type { ShoppingList } from "../../list-products";
+import { z } from "zod";
+import { getProductsByList } from "~/server/utils";
 
-interface ShoppingItem {
-  id: string;
-  name: string;
-  icon: string;
-}
+const listIdSchema = z.object({
+  listId: z.string(),
+});
 
-export async function getProductsById(
-    products: Array<string>
-  ): Promise<ShoppingList | null> {
-    const db = hubDatabase();
-    const selectById = (listId: string) => db.prepare(`SELECT * FROM products WHERE id=${listId}`).first();
-    
-    const results = await Promise.all(products.map(product => selectById(product)))
-    
-    if (results.length === 0) {
-      return null;
-    }
-    const res = results.map( result => {
-        if (result) {
-            return {
-                id: result.id as string,
-                name: result.name as string,
-                icon: result.icon as string,
-              };
-        }
-        return undefined;
-    }).filter((product): product is ShoppingItem => product !== undefined);
-  
-    return res;
+const validateListId = (data: unknown) => {
+  const result = listIdSchema.safeParse(data);
+  if (result.success) {
+    return { value: result.data };
+  } else {
+    return { error: result.error };
   }
-
-  export async function getProductsByList(listId: string): Promise<ShoppingList> {
-    const db = hubDatabase();
-    await db.exec(
-      "CREATE TABLE IF NOT EXISTS list_products (id INTEGER PRIMARY KEY, product TEXT, list TEXT)"
-    );
-    const { results } = await db.prepare(`SELECT * FROM list_products WHERE list=${listId}`).all();
-
-    let response: ShoppingList = [];
-
-    if (results) {
-        const products = await getProductsById(results.map(row => row.product as string ?? null));
-
-        if (products !== null) {
-            response = products;
-        }
-    }
-    return response;
-  }
+};
 
 export default eventHandler(async (event) => {
 
-  const listId = getRouterParam(event, 'listId') || 'unknown';
+  const routeParams = await getValidatedRouterParams(event, validateListId);
 
-  return getProductsByList(listId)
-    
+  if(routeParams.error) {
+    throw new Error('Route parameters are not valid')
+  }
+
+  const { listId } = routeParams.value;
+
+
+  if (isMethod(event, "GET")) {
+    return getProductsByList(listId);
+  } else {
+    return new Error("Only GET is allowed");
+  }
 });
