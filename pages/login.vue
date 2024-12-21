@@ -14,8 +14,8 @@ async function login() {
     },
   })
     .then(() => {
-        console.log('Login successful')
-        navigateTo('/', { replace: true })
+      console.log('Login successful')
+      navigateTo('/', { replace: true })
     })
     .catch((err) => {
       console.error(err)
@@ -25,35 +25,22 @@ async function login() {
 </script>
 
 <template>
-  <form
-      class="space-y-4"
-      @submit.prevent="login"
-    >
-    <label name="email">
-        email
-        <input
-          v-model="email"
-          name="email"
-          type="email"
-        >
-      </label>
+  <div class="flex flex-col col-span-8 md:col-span-6 gap-4 md:col-start-2 items-center md:items-start w-full">
+    <h1 class="text-7xl text-center font-bold text-indigo-800">Hola!</h1>
+    <form class="flex flex-col space-y-2 text-indigo-100" @submit.prevent="login">
+      <input
+          v-model="email" class="bg-transparent border border-indigo-500 rounded-md p-2 grow" placeholder="email"
+          name="email" type="email">
 
-      <label name="Password">
-        Password
-        <input
+          <input
           v-model="password"
-          name="password"
-          type="password"
-        >
-      </label>
-      
-      <button
-        type="submit"
-        :disabled="!password || !email"
-        color="black"
-        class="mt-2"
-      >
+          class="bg-transparent border border-indigo-500 rounded-md p-2 grow" name="password" placeholder="password"
+          type="password">
+
+      <button type="submit" :disabled="!password || !email" color="black"  class="w-full text-left p-2 bg-purple-800 hover:bg-purple-700 active:bg-indigo-700 rounded-md">
         Login
-    </button>
+      </button>
     </form>
+  </div>
+
 </template>
