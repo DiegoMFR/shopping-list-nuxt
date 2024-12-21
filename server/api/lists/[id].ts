@@ -26,6 +26,5 @@ export default eventHandler(async (event) => {
     products,
   };
 
-  console.log("aaa", listData);
   return listData;
 });

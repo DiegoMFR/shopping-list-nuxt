@@ -18,7 +18,6 @@ const list = ref<ListDataWithProducts | null>()
 
 try {
   const { data } = await useFetch<ListDataWithProducts>(`/api/lists/${listId}`);
-  console.log('bbb', data.value);
   if (data.value) {
     list.value = data.value;
   }
