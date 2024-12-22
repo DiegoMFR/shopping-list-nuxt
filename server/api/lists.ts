@@ -1,6 +1,3 @@
-import type { ListDataList } from "~/types";
-
-
 export default eventHandler(async () => {
   try {
     const db = hubDatabase();

@@ -1,6 +1,3 @@
-import type { ShoppingItem, ShoppingList } from "~/types";
-
-
 export default eventHandler(async ():Promise<ShoppingList> => {
     const db = hubDatabase();
 

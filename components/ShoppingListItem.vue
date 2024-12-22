@@ -8,8 +8,6 @@
     </li>
 </template>
 <script setup lang="ts">
-import type { ShoppingItem } from '~/types';
-
 interface Props {
     listItem: ShoppingItem
     theme?: 'added' | 'deleted'

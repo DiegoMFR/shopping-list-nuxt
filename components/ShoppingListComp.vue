@@ -6,8 +6,6 @@
     </ul>
 </template>
 <script setup lang="ts">
-import type { ShoppingItem, ShoppingList } from '~/types';
-
 
 interface Props {
     list: ShoppingList;

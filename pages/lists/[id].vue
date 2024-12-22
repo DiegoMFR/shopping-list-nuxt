@@ -10,14 +10,12 @@
 </template>
 <script setup lang="ts">
 import ListProducts from '~/components/ListProducts.vue';
-import type { ListDataWithProducts } from '~/server/api/lists/[id]';
-
 const listId = useRoute().params.id;
 
-const list = ref<ListDataWithProducts | null>()
+const list = ref<ListData | null>()
 
 try {
-  const { data } = await useFetch<ListDataWithProducts>(`/api/lists/${listId}`);
+  const { data } = await useFetch<ListData>(`/api/lists/${listId}`);
   if (data.value) {
     list.value = data.value;
   }

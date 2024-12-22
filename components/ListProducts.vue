@@ -29,8 +29,6 @@ v-else
 </template>
 
 <script setup lang="ts">
-import type { ListData, ShoppingItem } from '~/types';
-
 
 interface Props {
     listData: ListData;

@@ -25,7 +25,6 @@
 </template>
 <script setup lang="ts">
 import { addEmoji, getSuggestions } from '~/actions/ai.actions';
-import type { ShoppingItem, ShoppingList } from '~/types';
 
 interface Props {
     topics: Array<string>

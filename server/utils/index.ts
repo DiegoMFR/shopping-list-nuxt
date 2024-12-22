@@ -1,6 +1,3 @@
-import type { ShoppingItem, ShoppingList } from "~/types";
-
-
 export async function getProductsById(
   products: Array<string>
 ): Promise<ShoppingList | null> {

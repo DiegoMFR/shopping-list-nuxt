@@ -27,10 +27,7 @@
     </div>
 </template>
 
-
 <script setup lang="ts">
-import type { ListDataList } from '~/types';
-
 const lists = ref<ListDataList>();
 
 try {
