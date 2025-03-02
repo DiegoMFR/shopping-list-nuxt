@@ -2,7 +2,7 @@
     <li class="mb-2">
         <button
             :class="theme === 'added' ? 'bg-indigo-500/25' : 'bg-indigo-800/25 text-indigo-300 border border-indigo-800'"
-            class= "rounded-md px-4 py-2 block cursor-pointer w-full text-left`" @click="handleClick">
+            class= "rounded-md px-4 py-2 block cursor-pointer w-full text-left" @click="handleClick">
             {{listItem.name}}
         </button>
     </li>

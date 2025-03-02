@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { fetch: refreshSession } = useUserSession()
 const logging = ref(false)
 const password = ref('')
 const email = ref('')
@@ -13,9 +14,10 @@ async function login() {
       email: email.value,
     },
   })
-    .then(() => {
+    .then(async () => {
       console.log('Login successful')
-      navigateTo('/', { replace: true })
+      await refreshSession()
+      await navigateTo('/', { replace: true })
     })
     .catch((err) => {
       console.error(err)
